@@ -41,7 +41,7 @@ if uploaded_file:
     docs = splitter.split_documents(documents)
 
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectordb = Chroma.from_documents(docs, embedding=embeddings)
+    vectordb = Chroma.from_documents(docs,embedding=embeddings,persist_directory=None)
     retriever = vectordb.as_retriever()
 
     llm = HuggingFaceHub(repo_id="google/flan-t5-large", model_kwargs={"temperature": 0.5, "max_length": 512}, huggingfacehub_api_token=hf_token)
